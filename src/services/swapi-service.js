@@ -6,8 +6,7 @@ export default class SwapiService {
         const res = await fetch(`${ this._apiBase }${ url }`)
         
         if (!res.ok) {
-            throw new Error(`Could not fetch ${ url }` +
-                `, received ${ res.status }`)
+            throw new Error(`Could not fetch ${ url } received ${ res.status }`)
         }
         return await res.json()
     }
@@ -43,6 +42,8 @@ export default class SwapiService {
     }
     
     _extractId(item) {
+        // idRegExp - находит значение в конце строки, между двумя слешами
+        // см сайт regex101.com
         const idRegExp = /\/([0-9]*)\/$/
         return item.url.match(idRegExp)[1]
     }
